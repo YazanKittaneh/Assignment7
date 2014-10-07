@@ -87,7 +87,7 @@ public class VComposition
       }
     catch (Exception e)
       {
-        return e.toString();
+        return null;
       }
   } // row(int)
 

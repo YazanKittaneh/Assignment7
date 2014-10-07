@@ -20,10 +20,22 @@ public class TruncatedBlockTest
           new CenteredBlock(new VComposition(tb1, tb2), 7)), 15));
       pen.println("ORIGINAL");
       TBUtils.print(pen, compound);
+      try{
       tb2.setContents("Someone");
+      }
+      catch (Exception e)
+      {
+        System.out.println("doesn't work");
+      }
       pen.println("UPDATED");
       TBUtils.print(pen, compound);
+      try{
       tb1.setContents("Nice to meet you,");
+      }
+      catch (Exception e)
+      {
+        System.out.println("doesn't work");
+      }
       pen.println("RE-UPDATED");
       TBUtils.print(pen, compound);
   }
