@@ -50,8 +50,6 @@ public class HComposition
   public String row(int i)
     throws Exception
   {
-    try
-      {
         int lh = this.left.height();
         int rh = this.right.height();
         int h = Math.max(lh, rh);
@@ -81,11 +79,6 @@ public class HComposition
             result = result.concat(TBUtils.spaces(this.right.width()));
           } // if the right half does not contain an ith row
         return result;
-      }
-    catch (Exception e)
-      {
-        return e.toString();
-      }
   } // row(int)
 
   /**

@@ -1,5 +1,12 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+
+/**
+ * Represents two copies of the same block, side by side
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
 public class BlockPair
     implements TextBlock
 {
@@ -14,7 +21,7 @@ public class BlockPair
   // +--------------+
 
   /**
-   * Create a new pai block
+   * Create a new pair block
    * 
    * @param tb , a textblock
    */
@@ -28,32 +35,24 @@ public class BlockPair
   // +---------+
 
   /**
-   * Get the ith row of the block.
+   * Get the ith row of the block
    */
   @Override
   public String row(int i)
     throws Exception
   {
-    try
+    String pairLine = "";
+    if (i >= 0)
       {
-        String pairLine = "";
-        int count = 0;
-        if (i >= 0)
-          {
-            pairLine += textPair.row(i) + textPair.row(i);
-            return pairLine;
-          }
-        else
-          throw new Exception("Invalid row " + i);
+        pairLine += textPair.row(i) + textPair.row(i);
+        return pairLine;
       }
-    catch (Exception e)
-      {
-        return e.toString();
-      }
-  }
+    else
+      throw new Exception("Invalid row " + i);
+  } // row(int i)
 
   /**
-   * Determine how many rows are in the block.
+   * Determine how many rows are in the block
    */
   @Override
   public int height()
@@ -62,7 +61,7 @@ public class BlockPair
   } //height()
 
   /**
-   * Determine how many columns are in the block.
+   * Determine how many columns are in the block
    */
   @Override
   public int width()

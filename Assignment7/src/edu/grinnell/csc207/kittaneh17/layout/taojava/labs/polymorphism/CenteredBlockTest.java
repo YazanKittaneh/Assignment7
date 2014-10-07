@@ -1,6 +1,11 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
-//import static org.junit.Assert.*;
+/**
+ * Test for CenteredBlock
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
 
 import java.io.PrintWriter;
 

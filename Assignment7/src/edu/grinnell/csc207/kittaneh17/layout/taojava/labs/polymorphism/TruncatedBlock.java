@@ -1,5 +1,12 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+/**
+ * Represents the truncation of a text block to a desired width
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
+
 public class TruncatedBlock
     implements TextBlock
 {
@@ -38,8 +45,6 @@ public class TruncatedBlock
   public String row(int i)
     throws Exception
   {
-    try
-      {
         String turnLine = "";
 
         if (i >= 0)
@@ -49,11 +54,6 @@ public class TruncatedBlock
           } // i is a positive number
         else
           throw new Exception("Invalid row " + i);
-      }
-    catch (Exception e)
-      {
-        return e.toString();
-      }
   } // row(int)
 
   /**

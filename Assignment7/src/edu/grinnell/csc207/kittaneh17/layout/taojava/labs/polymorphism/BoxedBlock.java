@@ -45,34 +45,26 @@ public class BoxedBlock
   public String row(int i)
     throws Exception
   {
-    try
+    int h = this.contents.height();
+    // The top and bottom of the box
+    if ((i == 0) || (i == h + 1))
       {
-        int h = this.contents.height();
-        // The top and bottom of the box
-        if ((i == 0) || (i == h + 1))
-          {
-            return "+" + TBUtils.dashes(this.contents.width()) + "+";
-          }
-        // Stuff within the box
-        else if ((i > 0) && (i <= h))
-          {
-            return "|" + this.contents.row(i - 1) + "|";
-          }
-        // Everything else
-        else
-          {
-            throw new Exception("Invalid row " + i);
-          }
+        return "+" + TBUtils.dashes(this.contents.width()) + "+";
       }
-    catch (Exception e)
+    // Stuff within the box
+    else if ((i > 0) && (i <= h))
       {
-        return e.toString();
+        return "|" + this.contents.row(i - 1) + "|";
       }
-
+    // Everything else
+    else
+      {
+        throw new Exception("Invalid row " + i);
+      }
   } // row(int)
 
   /**
-   * Determine how many rows are in the block.
+   * Determine how many rows are in the block
    */
   public int height()
   {
@@ -80,7 +72,7 @@ public class BoxedBlock
   } // height()
 
   /**
-   * Determine how many columns are in the block.
+   * Determine how many columns are in the block
    */
   public int width()
   {

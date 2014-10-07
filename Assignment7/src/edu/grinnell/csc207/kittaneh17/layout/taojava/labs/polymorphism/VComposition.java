@@ -51,8 +51,6 @@ public class VComposition
     throws Exception
   {
     // Gather some basic information
-    try
-      {
         int th = this.top.height();
         int bh = this.bottom.height();
         int tw = this.top.width();
@@ -84,11 +82,6 @@ public class VComposition
           {
             return this.bottom.row(i - th) + padbot;
           } // if the row is in the bottom half
-      }
-    catch (Exception e)
-      {
-        return null;
-      }
   } // row(int)
 
   /**

@@ -1,5 +1,12 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+/**
+ * Test for RightJustified
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
+
 import static org.junit.Assert.*;
 
 import java.io.PrintWriter;

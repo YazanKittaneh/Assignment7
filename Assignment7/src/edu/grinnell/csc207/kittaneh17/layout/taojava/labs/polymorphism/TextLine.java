@@ -71,13 +71,15 @@ public class TextLine
   public void setContents(String newContents)
   throws Exception
   {
-   if(this.line.length() < newContents.length())
+    System.out.println("line width: " + this.width());
+    System.out.println("content width: " + newContents.length());
+    //System.out.println("total width: " + VComposition.width());
+   if(this.width() > newContents.length())   //Needs to check width of textblock not textline since textline is just the string
      {
        this.line=newContents;
      }
    else 
-     throw new Exception("error in textLine");
-     //System.out.println("error");
+     throw new Exception("Content too long for length");
     }
   
   

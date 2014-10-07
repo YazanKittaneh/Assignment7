@@ -1,5 +1,12 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+/**
+ * Test for TruncatedBlock
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
+
 import static org.junit.Assert.*;
 
 import java.io.PrintWriter;
@@ -10,7 +17,7 @@ public class TruncatedBlockTest
 {
 
   @Test
-  public void test()
+  public void test() throws Exception
   {
     PrintWriter pen = new PrintWriter(System.out,true);
         
@@ -20,22 +27,10 @@ public class TruncatedBlockTest
           new CenteredBlock(new VComposition(tb1, tb2), 7)), 15));
       pen.println("ORIGINAL");
       TBUtils.print(pen, compound);
-      try{
       tb2.setContents("Someone");
-      }
-      catch (Exception e)
-      {
-        System.out.println("doesn't work");
-      }
       pen.println("UPDATED");
       TBUtils.print(pen, compound);
-      try{
       tb1.setContents("Nice to meet you,");
-      }
-      catch (Exception e)
-      {
-        System.out.println("doesn't work");
-      }
       pen.println("RE-UPDATED");
       TBUtils.print(pen, compound);
   }

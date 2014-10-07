@@ -1,5 +1,13 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+/**
+ * Results in a text block of given width 
+ * and height, of a single character given
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
+
 public class Grid
     implements TextBlock
 {

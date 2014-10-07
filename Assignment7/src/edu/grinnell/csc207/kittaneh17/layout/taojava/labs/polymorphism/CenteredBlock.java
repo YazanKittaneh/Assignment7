@@ -1,5 +1,12 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+/**
+ * Represents the result of centering a text block within a certain width
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
+
 public class CenteredBlock
     implements TextBlock
 {
@@ -7,8 +14,9 @@ public class CenteredBlock
   // +--------+------------------------------------------------------------
   // | Fields |
   // +--------+
-  TextBlock textCent;
-  int widthCent = 0;
+
+  TextBlock textCent; //creates object TextBlock textCent
+  int widthCent = 0; //creates int widthCent
 
   // +--------------+------------------------------------------------------
   // | Constructors |
@@ -36,8 +44,6 @@ public class CenteredBlock
   public String row(int i)
     throws Exception
   {
-    try
-      {
         String centLine = "";
         int blankWidth = (widthCent - textCent.width()) / 2;
         int count = 0;
@@ -69,11 +75,6 @@ public class CenteredBlock
           }
         else
           throw new Exception("Invalid row " + i);
-      }
-    catch (Exception e)
-      {
-        return e.toString();
-      }
   }
 
   /**

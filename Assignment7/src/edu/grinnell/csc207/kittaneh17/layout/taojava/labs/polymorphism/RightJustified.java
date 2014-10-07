@@ -1,5 +1,13 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
+/**
+ * Represents the result of right-justifying the 
+ * underlying text block in a block of a width specified
+ * 
+ * @author Yazan Kittaneh
+ * @version 1.1 of October 2014
+ */
+
 public class RightJustified
     ///DON'T KNOW WHAT YOU MEAN BY WIDTH ON RIGHT
     implements TextBlock
@@ -38,8 +46,6 @@ public class RightJustified
   public String row(int i)
     throws Exception
   {
-    try
-      {
         String rightLine = "";
         int count = 0;
 
@@ -67,11 +73,6 @@ public class RightJustified
           }
         else
           throw new Exception("Invalid row " + i);
-      }
-    catch (Exception e)
-      {
-        return e.toString();
-      }
   } //String row(int i)
 
   @Override
