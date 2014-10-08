@@ -17,6 +17,7 @@ public class TextLine
    * The contents of the line.
    */
   String line;
+  int parentWidth = 0;
 
   // +--------------+------------------------------------------------------
   // | Constructors |
@@ -28,6 +29,7 @@ public class TextLine
   public TextLine(String line)
   {
     this.line = line;
+    parentWidth = this.line.length();
   } // TextLine(String)
 
   // +---------+-----------------------------------------------------------
@@ -66,22 +68,15 @@ public class TextLine
   {
     return this.line.length();
   } // width()
-  
-  
+
+  /**
+   * Sets this.line's contents to newly inputed contents
+   * 
+   * @param newContents, string
+   */
   public void setContents(String newContents)
-  throws Exception
   {
-    System.out.println("line width: " + this.width());
-    System.out.println("content width: " + newContents.length());
-    //System.out.println("total width: " + VComposition.width());
-   if(this.width() > newContents.length())   //Needs to check width of textblock not textline since textline is just the string
-     {
-       this.line=newContents;
-     }
-   else 
-     throw new Exception("Content too long for length");
-    }
-  
-  
+    this.line = newContents;
+  }
 
 } // class TextLine

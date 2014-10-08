@@ -15,13 +15,19 @@ import sun.security.util.PendingException;
 
 public class UshahidiUI
 {
-  
+
   //Fields for globals
+  static int startYear;
+  static int startMonth;
+  static int startDay;
+  static int endYear;
+  static int endMonth;
+  static int endDay;
   
   //The generic predicate
   static Predicate<UshahidiIncident> pred;
   static UshahidiWebClient webClient;
-  
+
   //Boolean to indicate whether the user has quit or not
   static boolean quit = false;
 
@@ -44,10 +50,12 @@ public class UshahidiUI
       }//while
 
   }//main
-/*
- * A method that does most of the work for the UI. Takes a PrintWriter and
- * a BufferedReader as input. 
- */
+
+  /*
+   * A method that does most of the work for the UI. Takes a PrintWriter and
+   * a BufferedReader as input. 
+   */
+
   public static void baseUI(PrintWriter pen, BufferedReader reader)
     throws Exception
 
@@ -58,7 +66,7 @@ public class UshahidiUI
 
     //Parse the url
     String url = reader.readLine();
-    
+
     //This try/catch block has custom exception handling, if the URL is malformed
     //a message is sent saying try again, and the method (baseUI) is called again
     try
@@ -67,7 +75,7 @@ public class UshahidiUI
       }//try
     catch (MalformedURLException e)
       {
-        System.out.println("\nInvalid URL. Please try again,\n");
+        pen.println("\nInvalid URL. Please try again,\n");
         return;
       }//catch
 
@@ -83,42 +91,55 @@ public class UshahidiUI
 
     String option = reader.readLine();
 
-    
     //This switch statement does most of the logic work
     switch (option)
       {
         case "1":
 
+          try
+          {
           pen.println("Start year:");
-          int startYear = Integer.parseInt(reader.readLine());
+          startYear = Integer.parseInt(reader.readLine());
           pen.println("Start month:");
-          int startMonth = Integer.parseInt(reader.readLine());
+          startMonth = Integer.parseInt(reader.readLine());
           pen.println("Start day:");
-          int startDay = Integer.parseInt(reader.readLine());
+          startDay = Integer.parseInt(reader.readLine());
           pen.println("End year:");
-          int endYear = Integer.parseInt(reader.readLine());
+          endYear = Integer.parseInt(reader.readLine());
           pen.println("End month:");
-          int endMonth = Integer.parseInt(reader.readLine());
+          endMonth = Integer.parseInt(reader.readLine());
           pen.println("End day:");
-          int endDay = Integer.parseInt(reader.readLine());
-
-          LocalDateTime startDate =
+          endDay = Integer.parseInt(reader.readLine());
+          }
+          catch (Exception e)  //catches invalid date inputs
+          {
+            pen.println("\nInvalid date. Please try again,\n");
+            break;
+          }
+          
+          final LocalDateTime startDate =
               LocalDateTime.of(startYear, startMonth, startDay, 00, 00);
-          LocalDateTime endDate =
+          final LocalDateTime endDate =
               LocalDateTime.of(endYear, endMonth, endDay, 00, 00);
 
           //The predicate is now assigned to checking for the date range
-          pred = new Predicate<UshahidiIncident>()
+          try
             {
+              pred = new Predicate<UshahidiIncident>()
+                {
 
-              @Override
-              public boolean test(UshahidiIncident t)
-              {
-                return (t.getDate().isBefore(endDate) && t.getDate()
-                                                          .isAfter(startDate));
-              }//test
-            };//Predicate
-
+                  @Override
+                  public boolean test(UshahidiIncident t)
+                  {
+                    return (t.getDate().isBefore(endDate) && t.getDate()
+                                                              .isAfter(startDate));
+                  }//test
+                };//Predicate
+            }
+          catch (Exception e)
+            {
+              pen.println("\nInvalid input. Please try again,\n");
+            }
           break;
         case "2":
 
@@ -126,43 +147,57 @@ public class UshahidiUI
           //Ushahidi Incidents' description fields.
           pen.println("Please enter the tag you wish to be searched in the description fields:");
           String tag = reader.readLine();
-
-          pred = new Predicate<UshahidiIncident>()
+          try
             {
+              pred = new Predicate<UshahidiIncident>()
+                {
 
-              @Override
-              public boolean test(UshahidiIncident t)
-              {
-                String description = t.getDescription();
+                  @Override
+                  public boolean test(UshahidiIncident t)
+                  {
+                    String description = t.getDescription();
 
-                return description.toLowerCase().contains(tag.toLowerCase());
-              }//test
-            };//Predicate
-
+                    return description.toLowerCase()
+                                      .contains(tag.toLowerCase());
+                  }
+                  //test
+                };//Predicate
+            }
+          catch (Exception e)
+            {
+              pen.println("\nInvalid input. Please try again,\n");
+            }
           break;
         case "3":
 
           //Similar to 2, but searches for the title
           pen.println("Please enter the title you wish to be searched in the title field");
           String title = reader.readLine();
-
-          pred = new Predicate<UshahidiIncident>()
+          try
             {
+              pred = new Predicate<UshahidiIncident>()
+                {
 
-              @Override
-              public boolean test(UshahidiIncident t)
-              {
-                String description = t.getTitle();
+                  @Override
+                  public boolean test(UshahidiIncident t)
+                  {
+                    String description = t.getTitle();
 
-                return description.toLowerCase().contains(title.toLowerCase());
-              }//test
-            };//Predicate
+                    return description.toLowerCase()
+                                      .contains(title.toLowerCase());
+                  }//test
+                };//Predicate
+            }
+          catch (Exception e)
+            {
+              pen.println("\nInvalid input. Please try again,\n");
+            }
           break;
         //The instance variable is changed if user asks to quit
         case "QUITQUIT":
           quit = true;
           break;
-          //Default case is when user enters input not recognized by the code
+        //Default case is when user enters input not recognized by the code
         default:
           pen.println("Please enter a valid option");
       }//switch
@@ -184,12 +219,13 @@ public class UshahidiUI
                 Ushahidi.printIncident(pen, incident);
               }//for
           }//else
-        
+
         //Ask the user whether they want to continue or not
         pen.println("Type YES to search again. Type QUITQUIT to quit");
         if (!reader.readLine().equals("YES"))
           {
-           quit = true;
+            pen.println("Goodbye!");
+            quit = true;
           }//if
       }//if(!quit)
   }//baseUI

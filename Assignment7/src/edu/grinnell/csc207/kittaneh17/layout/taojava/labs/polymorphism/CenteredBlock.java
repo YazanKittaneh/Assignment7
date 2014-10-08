@@ -44,38 +44,35 @@ public class CenteredBlock
   public String row(int i)
     throws Exception
   {
-        String centLine = "";
-        int blankWidth = (widthCent - textCent.width()) / 2;
-        int count = 0;
-        //System.out.println(blankWidth);
-        if (widthCent < textCent.width()) //exception if width given is smaller than textline width
+    String centLine = "";
+    int blankWidth = (widthCent - textCent.width()) / 2;
+    int count = 0;
+
+    if (widthCent < textCent.width()) //exception if width given is smaller than textline width
+      {
+        throw new Exception("Center width smaller than TextLine");
+      } //if
+    if (i >= 0)
+      {
+        while (count < widthCent)
           {
-            throw new Exception("Center width smaller than TextLine");
-          }
-        if (i >= 0)
-          {
-            while (count < widthCent)
+            if (count < blankWidth || count >= (blankWidth + textCent.width()))
               {
-                if (count < blankWidth
-                    || count >= (blankWidth + textCent.width()))
-                  {
-                    centLine += " ";
-                    //System.out.println("Within the if: " + centLine);
-                    count++;
-                  }
-                else
-                  {
-                    centLine += textCent.row(i);
-                    count = blankWidth + textCent.width();
-                    //System.out.println("Within the else: " + centLine);
-                  }
-              }
-            //System.out.println("Before Result: " + centLine);
-            return centLine;
-          }
-        else
-          throw new Exception("Invalid row " + i);
-  }
+                centLine += " ";
+                count++;
+              } //if black count is within blackWidth and the blackWidth+textCent.width()
+            else
+              {
+                centLine += textCent.row(i);
+                count = blankWidth + textCent.width();
+              } //else concatenate texctCent contents onto centLine
+                //move count to blackWidth+textCent.width()
+          } //while
+        return centLine;
+      } // if i is greater to or equal to 0
+    else
+      throw new Exception("Invalid row " + i);
+  } //row(int i)
 
   /**
    * Determine how many rows are in the block.

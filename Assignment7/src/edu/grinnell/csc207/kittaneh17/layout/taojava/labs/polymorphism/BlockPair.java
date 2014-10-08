@@ -1,6 +1,5 @@
 package edu.grinnell.csc207.kittaneh17.layout.taojava.labs.polymorphism;
 
-
 /**
  * Represents two copies of the same block, side by side
  * 
@@ -23,7 +22,7 @@ public class BlockPair
   /**
    * Create a new pair block
    * 
-   * @param tb , a textblock
+   * @param tb , a textBlock
    */
   public BlockPair(TextBlock tb)
   {
@@ -46,7 +45,7 @@ public class BlockPair
       {
         pairLine += textPair.row(i) + textPair.row(i);
         return pairLine;
-      }
+      } //if i is greater than or equal to 0
     else
       throw new Exception("Invalid row " + i);
   } // row(int i)

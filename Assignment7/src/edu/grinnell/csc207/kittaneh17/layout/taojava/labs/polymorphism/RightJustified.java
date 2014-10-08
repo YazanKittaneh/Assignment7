@@ -46,41 +46,48 @@ public class RightJustified
   public String row(int i)
     throws Exception
   {
-        String rightLine = "";
-        int count = 0;
+    String rightLine = "";
+    int count = 0;
 
-        if (widthRight < textRight.width()) //exception if width given is smaller than textline width
-          {
-            throw new Exception("Center width smaller than TextLine");
-          }
+    if (widthRight < textRight.width()) //exception if width given is 
+                                        //smaller than textLine width
+      {
+        throw new Exception("Center width smaller than TextLine");
+      }
 
-        if (i >= 0)
+    if (i >= 0)
+      {
+        while (count < widthRight)
           {
-            while (count < widthRight)
+            if (count < textRight.width())
               {
-                if (count < textRight.width())
-                  {
-                    rightLine += textRight.row(i);
-                    count = textRight.width();
-                  }
-                else
-                  {
-                    rightLine += " ";
-                    count++;
-                  }
-              }
-            return rightLine;
-          }
-        else
-          throw new Exception("Invalid row " + i);
+                rightLine += textRight.row(i);
+                count = textRight.width();
+              } //if count is less than the width of string
+            else
+              {
+                rightLine += " ";
+                count++;
+              } //else fill the rest of the width with blank space
+          } // iterate width times
+        return rightLine;
+      } // if i is greaterthan or equal to 0
+    else
+      throw new Exception("Invalid row " + i);
   } //String row(int i)
 
+  /**
+   * Returns height of textBlock
+   */
   @Override
   public int height()
   {
     return textRight.height();
   } //height()
 
+  /**
+   * Returns width given
+   */
   @Override
   public int width()
   {

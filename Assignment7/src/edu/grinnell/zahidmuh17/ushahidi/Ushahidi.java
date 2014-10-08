@@ -15,7 +15,11 @@ import edu.grinnell.glimmer.ushahidi.UshahidiUtils;
 public class Ushahidi
 {
 
-  // A client containing random incidents
+  /**
+   * A client containing random incidents
+   * 
+   * @return  newClient filled with random incident
+   */
   public static UshahidiTestingClient testingClient()
   {
     UshahidiTestingClient newClient = new UshahidiTestingClient();
@@ -23,11 +27,16 @@ public class Ushahidi
       {
         newClient.addIncident(UshahidiUtils.randomIncident());
 
-      }
+      } //creates 12 random incidents
     return newClient;
-  }
+  } //UshahidiTestingClient testingClient()
 
-  //print an Incident in custom format
+  /**
+   * Print an Incident in custom format
+   * 
+   * @param pen, a PrintWriter
+   * @param incident, the incident being specified
+   */
   public static void printIncident(PrintWriter pen, UshahidiIncident incident)
   {
     pen.println("Incident #: " + incident.getTitle());
@@ -37,13 +46,19 @@ public class Ushahidi
                 + ", " + incident.getVerified());
     pen.println("Date: " + incident.getDate());
     pen.println();
-  }
+  } //printIncident(PrintWriter pen, UshahidiIncident incident)
 
-  //A method that prints incidents given a specific date range
-
+  /**
+   * prints incidents, given a specific date range
+   * 
+   * @param client, the client with incidents
+   * @param startDate, the start date of the range
+   * @param endDate, the end date of the range
+   * @throws Exception
+   */
   public static void printIncidentsWithinDate(UshahidiClient client,
-                                       LocalDateTime startDate,
-                                       LocalDateTime endDate)
+                                              LocalDateTime startDate,
+                                              LocalDateTime endDate)
     throws Exception
   {
 
@@ -60,19 +75,25 @@ public class Ushahidi
             printIncident(pen, currentIncident);
             currentIncident = client.nextIncident();
 
-          }
+          } //if current incident is between startDate and endDate
         else
           {
-//            printIncident(pen, currentIncident);
             currentIncident = client.nextIncident();
-          }
+          } // else get new incident
 
-      }
+      } //while there are more incidents
 
-  }
+  } // printIncidentsWithinDate(client, startDate, endDate)
 
-  // A method that returns an ArrayList of UshahidiIncidents that lay in
-  // a specific date range
+  /**
+   * Returns an ArrayList of UshahidiIncidents that lay in
+   * a specific date range
+   * 
+   * @param client, the client with incidents
+   * @param startDate, the start date of the range
+   * @param endDate, the end date of the range
+   * @return 
+   */
   public ArrayList<UshahidiIncident>
     makeArrayofIncidentsWithinDate(UshahidiClient client,
                                    LocalDateTime startDate,
@@ -94,16 +115,24 @@ public class Ushahidi
 
             arrayList.add(incidentslist[index]);
 
-          }//if
+          }//if incident is between startDate and endDate
 
-      }//for
+      }//for each element in array
 
     return arrayList;
   }//makeArrayofIncidentsWithinDate
 
-  // A method that returns an ArrayList of Ushahidi Incidents that
-  // are within distance of the provided coordinates.
-  
+  /**
+   * A method that returns an ArrayList of Ushahidi Incidents that
+   * are within distance of the provided coordinates.
+   * 
+   * 
+   * @param client, the client with incidents
+   * @param latitude, a double
+   * @param longitude, a double
+   * @param distance, a double
+   * @return
+   */
   public static ArrayList<UshahidiIncident>
     incidentsWithinDistance(UshahidiClient client, double latitude,
                             double longitude, double distance)
@@ -121,23 +150,27 @@ public class Ushahidi
 
         if (sphericalDistance(currentLong, currentLat, longitude, latitude) <= distance)
           {
-            
-//            Print statements for testing:
-            
-//            System.out.println(sphericalDistance(currentLong, currentLat, longitude, latitude));
-//            printIncident(new PrintWriter(System.out, true),incidentslist[index] );
+
             arrayList.add(incidentslist[index]);
 
-          }//if
+          }//if the distance of incident is within selected distance
 
-      }//for
+      }//for every value of the array
     return arrayList;
   }//incidentsWithinDistance
 
-  //The following is a helper method that gives the distance 
-  //between two earth coordinates in miles
-  //source: http://andrew.hedges.name/experiments/haversine/
-
+  /**
+   * The following is a helper method that gives the distance 
+   * between two earth coordinates in miles
+   * 
+   * source: http://andrew.hedges.name/experiments/haversine/
+   * 
+   * @param longitude1, double
+   * @param latitude1, double
+   * @param longitude2, double
+   * @param latitude2, double
+   * @return d, spherical distance 
+   */
   public static double sphericalDistance(double longitude1, double latitude1,
                                          double longitude2, double latitude2)
   {
@@ -155,8 +188,14 @@ public class Ushahidi
 
   }//sphericalDistance
 
-  //A method for filtering a List (grabbed by a client) of Ushahidi incidents
-  //by a general Predicate
+  /**
+   * A method for filtering a List (grabbed by a client) of Ushahidi incidents
+   * by a general Predicate
+   * 
+   * @param pred, a predicate
+   * @param client, the client with incidents
+   * @return listResult, array list of incidents
+   */
   public static ArrayList<UshahidiIncident>
     generalFilter(Predicate<UshahidiIncident> pred, UshahidiClient client)
   {
@@ -171,13 +210,11 @@ public class Ushahidi
         if (pred.test(currentIncident))
           {
 
-//          Print statement for testing:            
-//            printIncident(new PrintWriter(System.out, true),incidentslist[index] );
             listResult.add(incidentslist[index]);
 
-          }// if
+          }// if current incident passes predicate
 
-      }//for
+      }//for every value in the arrayList
     return listResult;
 
   }//generalFilter(Predicate<UshahidiIncident> pred, UshahidiClient client)

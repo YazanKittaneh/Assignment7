@@ -42,10 +42,7 @@ public class Grid
   // +---------+
 
   /**
-   * Preconditions:
-   *            [None]
-   * Postconditions:
-   *            returns the height of the grid
+   * returns the height of the grid
    */
   @Override
   public int height()
@@ -54,10 +51,8 @@ public class Grid
   } //height()
 
   /**
-   * Preconditions:
-   *            [None]
-   * Postconditions:
-   *            returns the width of the grid
+   * returns the width of the grid
+   * 
    */
   @Override
   public int width()
@@ -65,12 +60,11 @@ public class Grid
     return widthGrid;
   } //width()
 
+
   /**
+   * returns a string line of chGrid of length width
    * 
-   * Preconditions:
-   *            i is greater than 0
-   * Postconditions:
-   *            returns a string line of chGrid of length width
+   * @param i, an int
    */
   @Override
   public String row(int i)
@@ -86,7 +80,7 @@ public class Grid
           {
             gridLine += this.chGrid;
             widthCounter--;
-          }
+          } //creates line of chGrid of length width
         return gridLine;
       } // i is a positive number
     else

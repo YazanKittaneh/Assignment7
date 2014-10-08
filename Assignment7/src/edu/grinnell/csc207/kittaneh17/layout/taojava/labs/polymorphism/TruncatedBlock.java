@@ -14,6 +14,9 @@ public class TruncatedBlock
   // | Fields |
   // +--------+
 
+  /**
+   * Contents of  TruncatedBlock
+   */
   TextBlock textTurn;
   int widthTrun = 0;
 
